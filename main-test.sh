@@ -72,21 +72,18 @@ mouse_window_lock() {
       xdotool mousemove $MOUSE_POSITION_X $((WINDOW_POSITION_Y + WINDOW_SIZE_HEIGHT - 5)) 
     fi
   
-    # echo -e "
-    #   MOUSE_POSITION_Y: $MOUSE_POSITION_Y
-    #   MOUSE_POSITION_X: $MOUSE_POSITION_X
-    #
-    #   WINDOW_SIZE_HEIGHT: $WINDOW_SIZE_HEIGHT
-    #   WINDOW_SIZE_WIDTH: $WINDOW_SIZE_WIDTH
-    #   WINDOW_POSITION_Y: $WINDOW_POSITION_Y
-    #   WINDOW_POSITION_X: $WINDOW_POSITION_X 
-    #
-    #   WINDOW_MOUSE_POSITION_Y: $WINDOW_MOUSE_POSITION_Y
-    #   WINDOW_MOUSE_POSITION_X: $WINDOW_MOUSE_POSITION_X
-    # "
+    echo -e "
+      MOUSE_POSITION_Y: $MOUSE_POSITION_Y
+      MOUSE_POSITION_X: $MOUSE_POSITION_X
 
-  else
-    echo "False"
+      WINDOW_SIZE_HEIGHT: $WINDOW_SIZE_HEIGHT
+      WINDOW_SIZE_WIDTH: $WINDOW_SIZE_WIDTH
+      WINDOW_POSITION_Y: $WINDOW_POSITION_Y
+      WINDOW_POSITION_X: $WINDOW_POSITION_X 
+
+      WINDOW_MOUSE_POSITION_Y: $WINDOW_MOUSE_POSITION_Y
+      WINDOW_MOUSE_POSITION_X: $WINDOW_MOUSE_POSITION_X
+    " 
   fi
 }
 
@@ -97,7 +94,10 @@ while true; do
   IS_WINDOW_ACTIVE=$([ "$TARGET_WINDOW_NAME" == "$WINDOW_NAME" ] && echo "true" || echo "false")
 
   mouse_window_lock
-
-
+  
+  if [[ "$IS_WINDOW_ACTIVE" == "true" ]]; then
+    break
+  fi
+  
   sleep 0.01
 done
