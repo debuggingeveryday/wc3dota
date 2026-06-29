@@ -4,7 +4,16 @@
 
 # screenshot
 super + F12
-  $HOME/PROJECT/arch_linux/screen-shot.sh
+  $HOME/PROJECT/arch_linux/screen-shot/save-file.sh
+
+super + F11
+  $HOME/PROJECT/arch_linux/screen-shot/ocr-copy.sh
+
+super + F10
+  $HOME/PROJECT/arch_linux/screen-shot/clipboard.sh
+
+Home 
+  xbindkeys -n -v
 
 # terminal emulator
 super + Return
@@ -123,46 +132,4 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
-
-
-# WC3 dota
-
-@alt + q
-  xdotool keydown --clearmodifiers Alt_L && xdotool keydown --clearmodifiers KP_7 && xdotool keyup --clearmodifiers KP_7 && xdotool keyup --clearmodifiers Alt_L 
-
-@alt + w
-  xdotool keydown --clearmodifiers Alt_L && xdotool keydown --clearmodifiers KP_8 && xdotool keyup --clearmodifiers KP_8 && xdotool keyup --clearmodifiers Alt_L 
-
-@alt + s
-  xdotool keydown --clearmodifiers Alt_L && xdotool keydown --clearmodifiers KP_5 && xdotool keyup --clearmodifiers KP_5 && xdotool keyup --clearmodifiers Alt_L 
-
-@alt + a
-  xdotool keydown --clearmodifiers Alt_L && xdotool keydown --clearmodifiers KP_4 && xdotool keyup --clearmodifiers KP_4 && xdotool keyup --clearmodifiers Alt_L 
-
-@alt + z
-  xdotool keydown --clearmodifiers Alt_L && xdotool keydown --clearmodifiers KP_1 && xdotool keyup --clearmodifiers KP_1 && xdotool keyup --clearmodifiers Alt_L 
-
-@alt + x
-  xdotool keydown --clearmodifiers Alt_L && xdotool keydown --clearmodifiers KP_2 && xdotool keyup --clearmodifiers KP_2 && xdotool keyup --clearmodifiers Alt_L 
-
-q
-  /home/scrubs/PROJECT/wc3dota/script.sh "skill-1"
-
-w
-  /home/scrubs/PROJECT/wc3dota/script.sh "skill-2"
-
-e
-  /home/scrubs/PROJECT/wc3dota/script.sh "skill-3"
-
-r
-  /home/scrubs/PROJECT/wc3dota/script.sh "skill-4"
-
-d
-  /home/scrubs/PROJECT/wc3dota/script.sh "skill-5"
-
-f
-  /home/scrubs/PROJECT/wc3dota/script.sh "skill-6"
-
-g
-  /home/scrubs/PROJECT/wc3dota/script.sh "skill-7"
 

@@ -29,7 +29,6 @@ ROW_ONE=81.94
 ROW_TWO=88.88
 ROW_THREE=95.83
 
-
 skill_location_q() {
   X=$(echo "$WINDOW_SIZE_WIDTH * ($COLUMN_ONE / 100)" | bc -l)
   Y=$(echo "$WINDOW_SIZE_HEIGHT * ($ROW_THREE / 100)" | bc -l)
@@ -44,8 +43,8 @@ skill_location_q() {
   mouse_last_position_y=$MOUSE_POSITION_Y
 
   if [[ "$IS_WINDOW_ACTIVE" == "true" ]]; then
-    xdotool mousemove $X $Y click 1
-    xdotool mousemove $mouse_last_position_x $mouse_last_position_y
+    xdotool mousemove --sync $X $Y click 1 sleep 0.001
+    xdotool mousemove --sync $mouse_last_position_x $mouse_last_position_y sleep 0.001
   fi
 }
 
@@ -167,8 +166,10 @@ window_info() {
   WINDOW_ID=$(xdotool getactivewindow)
   WINDOW_NAME=$(xdotool getwindowname $WINDOW_ID)
 
+  echo $WINDOW_NAME
+
   IS_WINDOW_ACTIVE=$([ "$TARGET_WINDOW_NAME" == "$WINDOW_NAME" ] && echo "true" || echo "false")
-    
+
   if [[ "$IS_WINDOW_ACTIVE" == "true" ]]; then
     eval "$(xdotool getmouselocation --shell)"
 
@@ -203,30 +204,59 @@ mouse_window_lock() {
   
   window_info
 
+  MODIFIED=false
+
   # if overlap left window
   if [[ $MOUSE_POSITION_X -lt $WINDOW_POSITION_X ]]; then
-    xdotool mousemove $WINDOW_POSITION_X $MOUSE_POSITION_Y
+    MOUSE_POSITION_X=$WINDOW_POSITION_X
+    MODIFIED=true
   fi
 
   # if overlap right window
   if [[ $MOUSE_POSITION_X -gt $((WINDOW_POSITION_X + WINDOW_SIZE_WIDTH)) ]]; then
-    xdotool mousemove $((WINDOW_POSITION_X + WINDOW_SIZE_WIDTH)) $MOUSE_POSITION_Y
-  fi
-
-  # if overlap right window
-  if [[ $MOUSE_POSITION_X -gt $((WINDOW_POSITION_X + WINDOW_SIZE_WIDTH)) ]]; then
-    xdotool mousemove $((WINDOW_POSITION_X + WINDOW_SIZE_WIDTH - 5)) $MOUSE_POSITION_Y
+    MOUSE_POSITION_X=$((WINDOW_POSITION_X + (WINDOW_SIZE_WIDTH - 5)))
+    MODIFIED=true
   fi
 
   # if overlap top window
   if [[ $MOUSE_POSITION_Y -lt $WINDOW_POSITION_Y ]]; then
-    xdotool mousemove $MOUSE_POSITION_X $WINDOW_POSITION_Y 
+    MOUSE_POSITION_Y=$(($WINDOW_POSITION_Y + 6))
+    MODIFIED=true
   fi
 
   # if overlap bottom window
   if [[ $MOUSE_POSITION_Y -gt $((WINDOW_POSITION_Y + WINDOW_SIZE_HEIGHT)) ]]; then
-    xdotool mousemove $MOUSE_POSITION_X $((WINDOW_POSITION_Y + WINDOW_SIZE_HEIGHT - 5)) 
+    MOUSE_POSITION_Y=$((WINDOW_POSITION_Y + WINDOW_SIZE_HEIGHT - 2))
+    MODIFIED=true
   fi
+
+  if [[ "$MODIFIED" == "true" ]]; then
+    xdotool mousemove $MOUSE_POSITION_X $MOUSE_POSITION_Y
+  fi
+
+  # # if overlap left window
+  # if [[ $MOUSE_POSITION_X -lt $WINDOW_POSITION_X ]]; then
+  #   xdotool mousemove $WINDOW_POSITION_X $MOUSE_POSITION_Y
+  # fi
+  #
+  # # if overlap right window
+  # if [[ $MOUSE_POSITION_X -gt $((WINDOW_POSITION_X + WINDOW_SIZE_WIDTH)) ]]; then
+  #   xdotool mousemove $((WINDOW_POSITION_X + WINDOW_SIZE_WIDTH)) $MOUSE_POSITION_Y
+  # fi
+  #
+  # # if overlap top window
+  # if [[ $MOUSE_POSITION_Y -lt $WINDOW_POSITION_Y ]]; then
+  #   xdotool mousemove $MOUSE_POSITION_X $WINDOW_POSITION_Y 
+  # fi
+  #
+  # # if overlap bottom window
+  # if [[ $MOUSE_POSITION_Y -gt $((WINDOW_POSITION_Y + WINDOW_SIZE_HEIGHT)) ]]; then
+  #   xdotool mousemove $MOUSE_POSITION_X $((WINDOW_POSITION_Y + WINDOW_SIZE_HEIGHT - 5)) 
+  # fi
+  #
+  # if [ "$MODIFIED" -eq "true" ]; then
+  #   xdotool mousemove $WINDOW_POSITION_X $MOUSE_POSITION_Y
+  # fi
 
   sleep 0.01
   done
@@ -236,37 +266,37 @@ if [[ $1 == "window-lock" ]]; then
   mouse_window_lock
 fi
 
-if [[ $1 == "skill-1" ]]; then
+if [[ $1 == "first" ]]; then
   window_info
   skill_location_q
 fi
 
-if [[ $1 == "skill-2" ]]; then
+if [[ $1 == "second" ]]; then
   window_info
   skill_location_w
 fi
 
-if [[ $1 == "skill-3" ]]; then
+if [[ $1 == "third" ]]; then
   window_info
   skill_location_e
 fi
 
-if [[ $1 == "skill-4" ]]; then
+if [[ $1 == "ulti" ]]; then
   window_info
   skill_location_r
 fi
 
-if [[ $1 == "skill-5" ]]; then
+if [[ $1 == "four" ]]; then
   window_info
   skill_location_d
 fi
 
-if [[ $1 == "skill-6" ]]; then
+if [[ $1 == "five" ]]; then
   window_info
   skill_location_f
 fi
 
-if [[ $1 == "skill-7" ]]; then
+if [[ $1 == "special" ]]; then
   window_info
   skill_location_g
 fi
