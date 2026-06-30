@@ -1,6 +1,9 @@
+; #IfWinActive ahk_class explorer.exe
+; #SingleInstance, Force
+; SetMouseDelay, -1
+; #Persistent
 
 ; Inventroy
-
 !q::
   Send {Numpad7}
 return
@@ -26,7 +29,6 @@ return
 return
 
 ; Skill
-
 q::
   Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "first"
 return
@@ -55,7 +57,6 @@ g::
   Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "special"
 return
 
-Insert::
-  
-return
-
+; LButton::
+; MouseClick, left,,, 5
+; return

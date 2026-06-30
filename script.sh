@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TARGET_WINDOW_NAME="Warcraft III"
+TARGET_WINDOW_NAME="Wine Desktop"
 
 # SCREEN_WIDTH=$(xdpyinfo | grep dimensions | awk '{print $2}' | sed 's/x/\ /g' | awk '{print $1}')
 # SCREEN_HEIGHT=$(xdpyinfo | grep dimensions | awk '{print $2}' | sed 's/x/\ /g' | awk '{print $2}')
