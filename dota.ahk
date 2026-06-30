@@ -1,7 +1,25 @@
 ; #IfWinActive ahk_class explorer.exe
-; #SingleInstance, Force
-; SetMouseDelay, -1
-; #Persistent
+#MaxThreadsPerHotkey 10
+#SingleInstance, Force
+SetMouseDelay, -1
+#Persistent
+
+dota_id := "48234503"
+
+; Loop,
+; {
+;   WinGet, active_id, ID, A
+;   ; Run, "notify-send" "%active_id% %dota_id%"
+;
+;   if (true = true)
+;   {
+;     Run, "notify-send" "hello"
+;   }
+;   Sleep, 1000
+; }
+
+
+Home::Suspend
 
 ; Inventroy
 !q::
@@ -60,3 +78,6 @@ return
 ; LButton::
 ; MouseClick, left,,, 5
 ; return
+
+;}
+
