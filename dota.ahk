@@ -1,10 +1,11 @@
 ; #IfWinActive ahk_class explorer.exe
-#MaxThreadsPerHotkey 10
+; #MaxThreadsPerHotkey 10
 #SingleInstance, Force
 SetMouseDelay, -1
-#Persistent
+; #Persistent
 
 dota_id := "48234503"
+script_path := "/home/scrubs/PROJECT/wc3dota/script.sh"
 
 ; Loop,
 ; {
@@ -17,7 +18,6 @@ dota_id := "48234503"
 ;   }
 ;   Sleep, 1000
 ; }
-
 
 Home::Suspend
 
@@ -78,6 +78,4 @@ return
 ; LButton::
 ; MouseClick, left,,, 5
 ; return
-
-;}
 
