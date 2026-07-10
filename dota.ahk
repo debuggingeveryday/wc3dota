@@ -1,7 +1,7 @@
 ; #IfWinActive ahk_class explorer.exe
 ; #MaxThreadsPerHotkey 10
-#SingleInstance, Force
-SetMouseDelay, -1
+; #SingleInstance, Force
+; SetMouseDelay, -1
 ; #Persistent
 
 dota_id := "48234503"
