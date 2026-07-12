@@ -20,59 +20,103 @@ script_path := "/home/scrubs/PROJECT/wc3dota/script.sh"
 ; }
 
 Home::Suspend
+on_bind := TRUE
+on_chat := FALSE
 
-; Inventroy
+
+on_bind_display_message := (on_bind == TRUE) ? "on" : "off"
+Run, "notify-send" "-r" "1" "-t" "0" "Bind: %on_bind_display_message%"
+
+Home::
+  Suspend
+  on_bind := !on_bind
+  on_bind_display_message := (on_bind == TRUE) ? "on" : "off"
+  Run, "notify-send" "-r" "1" "-t" "0" "Bind: %on_bind_display_message%"
+  if on_bind = FALSE
+    on_chat = FALSE
+    is_on_chat_display_message := "off"
+    Run, "notify-send" "-r" "2" "-t" "0" "Chat: %is_on_chat_display_message%"
+return
+
+Enter::
+  Send {Enter}
+  on_chat := !on_chat
+  is_on_chat_display_message := (on_chat == TRUE) ? "on" : "off"
+  Msgbox, %is_on_chat_display_message%
+
+  ; on_chat := !on_chat
+  ; if on_chat = TRUE
+  ;   Msgbox, "yes"
+  ;   return
+return
+
+; Inventory
+
+!Esc::Reload
+
 !q::
   Send {Numpad7}
 return
 
 !w::
-  Send {Numpad8}
+  if on_chat = FALSE
+    Send {Numpad8}
 return
 
 !a::
-  Send {Numpad4}
+  if on_chat = FALSE
+    Send {Numpad4}
 return
 
 !s::
-  Send {Numpad5}
+  if on_chat = FALSE
+    Send {Numpad5}
 return
 
 !z::
-  Send {Numpad1}
+  if on_chat = FALSE
+    Send {Numpad1}
 return
 
 !x::
-  Send {Numpad2}
+  if on_chat = FALSE
+    Send {Numpad2}
 return
 
 ; Skill
 q::
-  Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "first"
+  if on_chat = FALSE
+    Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "first"
 return
 
 w::
-  Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "second"
+  if on_chat = FALSE
+    Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "second"
 return
 
 e::
-  Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "third"
+  if on_chat = FALSE
+    Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "third"
 return
 
 r::
-  Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "ulti"
+  if on_chat = FALSE
+    Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "ulti"
 return
 
 d::
-  Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "four"
+  if on_chat = FALSE
+    Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "four"
 return
 
 f::
-  Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "five"
+  if on_chat = FALSE
+    Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "five"
 return
 
 g::
-  Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "special"
+  if on_chat = FALSE
+    Run, "/home/scrubs/PROJECT/wc3dota/script.sh" "special"
 return
 
 ; LButton::
