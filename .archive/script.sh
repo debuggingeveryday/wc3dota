@@ -166,8 +166,6 @@ window_info() {
   WINDOW_ID=$(xdotool getactivewindow)
   WINDOW_NAME=$(xdotool getwindowname $WINDOW_ID)
 
-  echo $WINDOW_NAME
-
   IS_WINDOW_ACTIVE=$([ "$TARGET_WINDOW_NAME" == "$WINDOW_NAME" ] && echo "true" || echo "false")
 
   if [[ "$IS_WINDOW_ACTIVE" == "true" ]]; then
@@ -186,22 +184,35 @@ window_info() {
 
     WINDOW_MOUSE_POSITION_X=$((MOUSE_POSITION_X - WINDOW_POSITION_X))
     WINDOW_MOUSE_POSITION_Y=$((MOUSE_POSITION_Y - WINDOW_POSITION_Y))
+
+    ## Debugging
+    # X=$(echo "$WINDOW_SIZE_WIDTH * ($COLUMN_ONE / 100)" | bc -l)
+    # Y=$(echo "$WINDOW_SIZE_HEIGHT * ($ROW_THREE / 100)" | bc -l)
+
+    # X=$(awk "BEGIN {printf \"%.0f\", $X}")
+    # Y=$(awk "BEGIN {printf \"%.0f\", $Y}")
+    #
+    # X=$((X + WINDOW_POSITION_X))
+    # Y=$((Y + WINDOW_POSITION_Y))
+
  
-    # echo "
-    #   {
-    #     mouse_position_y: $MOUSE_POSITION_Y
-    #     mouse_position_x: $MOUSE_POSITION_X
-    #     window_size_height: $WINDOW_SIZE_HEIGHT
-    #     window_size_width: $WINDOW_SIZE_WIDTH
-    #     window_position_y: $WINDOW_POSITION_Y
-    #     window_position_x: $WINDOW_POSITION_X 
-    #   }"
+    echo "
+      {
+        mouse_position_y: $MOUSE_POSITION_Y
+        mouse_position_x: $MOUSE_POSITION_X
+        window_size_height: $WINDOW_SIZE_HEIGHT
+        window_size_width: $WINDOW_SIZE_WIDTH
+        window_position_y: $WINDOW_POSITION_Y
+        window_position_x: $WINDOW_POSITION_X 
+        -------------------------------------
+        Goals: $X, $Y
+      }"
   fi
 }
 
 mouse_window_lock() {
   while true; do
-  
+
   window_info
 
   MODIFIED=false
@@ -233,30 +244,6 @@ mouse_window_lock() {
   if [[ "$MODIFIED" == "true" ]]; then
     xdotool mousemove $MOUSE_POSITION_X $MOUSE_POSITION_Y
   fi
-
-  # # if overlap left window
-  # if [[ $MOUSE_POSITION_X -lt $WINDOW_POSITION_X ]]; then
-  #   xdotool mousemove $WINDOW_POSITION_X $MOUSE_POSITION_Y
-  # fi
-  #
-  # # if overlap right window
-  # if [[ $MOUSE_POSITION_X -gt $((WINDOW_POSITION_X + WINDOW_SIZE_WIDTH)) ]]; then
-  #   xdotool mousemove $((WINDOW_POSITION_X + WINDOW_SIZE_WIDTH)) $MOUSE_POSITION_Y
-  # fi
-  #
-  # # if overlap top window
-  # if [[ $MOUSE_POSITION_Y -lt $WINDOW_POSITION_Y ]]; then
-  #   xdotool mousemove $MOUSE_POSITION_X $WINDOW_POSITION_Y 
-  # fi
-  #
-  # # if overlap bottom window
-  # if [[ $MOUSE_POSITION_Y -gt $((WINDOW_POSITION_Y + WINDOW_SIZE_HEIGHT)) ]]; then
-  #   xdotool mousemove $MOUSE_POSITION_X $((WINDOW_POSITION_Y + WINDOW_SIZE_HEIGHT - 5)) 
-  # fi
-  #
-  # if [ "$MODIFIED" -eq "true" ]; then
-  #   xdotool mousemove $WINDOW_POSITION_X $MOUSE_POSITION_Y
-  # fi
 
   sleep 0.01
   done
